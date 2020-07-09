@@ -1,8 +1,9 @@
-from sample import *
-from evolutionary import *
-from wrapper import *
+from context import predlig
+from predlig.sample import *
+from predlig.wrapper import *
+from predlig.evolutionary import *
 
-sample = CDConstructor("flickr_al.txt", 10000, (0.5, 0.5))
+sample = CDConstructor("flickr_al.txt", 1000, (0.5, 0.5))
 sample.set_classification_dataset('flickr_final_version_attributes', 'flickr_final_version')
 table = sample.get_classification_dataset()
 number_of_attributes = len(sample.ordered_attributes_list)
@@ -21,7 +22,7 @@ for metric in metrics:
 		BaFE.perform_feature_selection()
 		message += "%s;%f/%s;%f/%s;%f/%s\n" %(classifier, FFS.best_score, FFS.best_var_subset, BaFE.best_score, BaFE.best_var_subset, BiFE.best_score, BiFE.best_var_subset)
 
-print message
+print(message)
 
 message = "Dataset Flickr\n"
 for metric in metrics:
@@ -42,4 +43,4 @@ for metric in metrics:
 		message += ";%s/%s" %(FS3.best_solution.fitness.values[0], [i for i in range(len(FS3.best_solution)) if FS3.best_solution[i] == 1])
 		message += ";%s/%s\n" %(FS4.best_solution.fitness.values[0], [i for i in range(len(FS4.best_solution)) if FS4.best_solution[i] == 1])
 
-print message
+print(message)

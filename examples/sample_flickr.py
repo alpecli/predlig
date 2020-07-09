@@ -1,4 +1,5 @@
-from sample import *
+from context import predlig
+from predlig.sample import *
 
 sample = CDConstructor("flickr_al.txt", 10000, (0.5, 0.5))
 dataset = sample.get_sample()

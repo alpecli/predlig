@@ -1,4 +1,5 @@
-from sample import *
+from context import predlig
+from predlig.sample import *
 
 sample = CDConstructor("microsoft_training.txt", 10000, (0.5, 0.5), "future_link_prediction", "microsoft_test.txt")
 sample.get_sample()

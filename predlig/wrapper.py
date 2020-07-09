@@ -99,7 +99,7 @@ class BackwardFeatureElimination(WrapperFeatureSelection):
 				self.best_temp_score = score
 				self.best_temp_var_subset = list(variable_subset)
 		
-		if (self.best_score <= self.best_temp_score):
+		if (not self.best_score or self.best_score <= self.best_temp_score):
 			self.best_score = self.best_temp_score
 			self.best_var_subset = list(self.best_temp_var_subset)
 			self.variable_subset = list(self.best_var_subset)
@@ -139,7 +139,10 @@ class ForwardFeatureSelection(WrapperFeatureSelection):
 			self.possible_solutions.append(variable_subset)
 			
 	def reached_stopping_criteria(self):
-		return  ((self.best_score != None and (self.best_temp_score < self.best_score or len(self.best_temp_var_subset) > len(self.best_var_subset))) or len(self.best_var_subset) >= self.number_variables)
+		return ((self.best_score and \
+			(self.best_temp_score < self.best_score or \
+			len(self.best_temp_var_subset) > len(self.best_var_subset))) or \
+			len(self.best_var_subset) >= self.number_variables)
 		'''if self.best_score != None:
 			return False
 		elif self.best_temp_score == self.best_score:
@@ -155,7 +158,7 @@ class ForwardFeatureSelection(WrapperFeatureSelection):
 				self.best_temp_score = score
 				self.best_temp_var_subset = list(variable_subset)
 		
-		if self.best_score == None or self.best_score < self.best_temp_score:
+		if (not self.best_score or self.best_score < self.best_temp_score):
 			self.best_score = self.best_temp_score
 			self.best_var_subset = list(self.best_temp_var_subset)		
 			list(set(self.variable_subset) - set(self.best_var_subset))
@@ -214,7 +217,7 @@ class BidirectionalFeatureSelection(WrapperFeatureSelection):
 				self.worst_score = score
 				self.worst_var_subset = list(variable_subset)
 		
-		if self.best_score < self.best_temp_score:
+		if (not self.best_score or self.best_score < self.best_temp_score):
 			self.best_score = self.best_temp_score
 			self.best_var_subset = list(self.best_temp_var_subset)
 			self.variable_subset = list(set(self.variable_subset) - set(self.worst_var_subset) - set(self.best_var_subset))

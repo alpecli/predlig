@@ -264,7 +264,7 @@ class CDConstructor:
 				self.classification_dataset[[examples],[attribute]] = (self.classification_dataset[[examples],[attribute]] - self.classification_dataset[[examples],[attribute]].mean())/np.std(self.classification_dataset[[examples],[attribute]])
 	
 	def get_classification_dataset(self):
-		if self.classification_dataset == None:
+		if self.classification_dataset is None:
 			self.classification_dataset = self.calculate_classification_dataset()
 		return self.classification_dataset
 	
